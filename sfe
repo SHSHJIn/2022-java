@@ -1,0 +1,13 @@
+package dynamic_arrays_new_java;
+
+public class dynamic_arrays_prective {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Hello");
+
+
+	}
+
+}
