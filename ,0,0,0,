@@ -1,0 +1,52 @@
+package dynamic_arrays_practice;
+
+import java.util.Scanner;
+
+public class dynamic_arrays_program_1_in_class {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Arrays. Limitations. Example 1");
+		
+		int Array[] = new int[5];
+		
+		/// add zeros to Array
+		
+		for(int i =0; i<5; i++)
+		{
+			
+			Array[i] =0;
+
+			
+		}
+		
+		////Array = {0,0,0,0,0}
+		
+		//// prompt user to add elemts to Array
+		
+		Scanner sc = new Scanner(System.in);
+		
+		Display_array(Array); /// call function to display Array elements
+		
+		input_array
+		
+		
+
+	}
+	
+	public static void Display_array(int []input_array)
+	{
+		System.out.print("Array[] = ");
+		for(int i=0; i <5; i++)
+		{
+			System.out.print(input_array[i] +", ");
+		}
+		
+	}
+	
+	
+	
+
+}
+
+
