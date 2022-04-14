@@ -1,0 +1,67 @@
+import java.util.Stack;
+
+public class Stack_practice_in_class_1 {
+
+	public static void main(String[] args) {
+		
+		Stack<String> myStack = new Stack<>();
+		myStack.push("Sunday");
+		myStack.push("Monday");
+		myStack.push("Tuesday");
+		myStack.push("Wednesday");
+		myStack.push("Thursday");
+		myStack.push("Friday");
+		myStack.push("Saturday");
+		
+		System.out.println("Elements of Stack : " + myStack);
+		
+		System.out.println("////   Use myStack.pop()    ////");
+		
+		String last_Stack_element = myStack.pop(); /// read and remove "Saturday"		
+		
+		System.out.println("myStack.pop() : " + last_Stack_element);
+		
+		System.out.println("Elements of Stack : " + myStack);
+		
+		String last_Stack_element_2 = myStack.pop(); /// read and remove "Friday"
+		
+		System.out.println("myStack.pop() : " + last_Stack_element_2);
+		
+		System.out.println("Elements of Stack : " + myStack);
+		
+		System.out.println("Is the myStack empty? " + myStack.empty());
+		System.out.println("myStack size : " + myStack.size());
+		
+		/// search ///
+		
+		int index = myStack.search("Monday");
+		
+		System.out.println("Search for 'Monday' in myStack : index is  -  " + index);
+		
+		System.out.println();
+		
+		/// peek ///
+		
+		String last_element_to_peek = myStack.peek(); ///read and remove "Thursday"
+		
+		System.out.println("myStack.peek() :  " + last_element_to_peek);
+		
+		System.out.println("Elements of Stack : " + myStack);
+		
+		System.out.println();
+		
+        String last_element_to_pop = myStack.pop(); ///read and remove "Thursday"
+		
+		System.out.println("myStack.pop() :  " + last_element_to_pop);
+		
+		System.out.println("Elements of Stack : " + myStack);
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}
