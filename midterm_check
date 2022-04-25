@@ -1,0 +1,710 @@
+////리스트 홈 프로젝트 ////
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Home_Project_1_List {
+
+	public static void main(String[] args) {
+		System.out.println("Home Project #1. List. Basic");
+		System.out.println("//// List_1 ////");
+		List<Integer> List_1 = new ArrayList<>(List.of(13, 7, 4, 5, 12, 9, 5, 2, 1, 6 ));
+		List<Integer> List_2 = new ArrayList<>();
+		for(int i = 0 ; i< List_1.size() ; i++)
+		{
+			List_2.add(List_1.get(i));
+		}		
+		Display_List("List_1" , List_1);
+		System.out.println();
+
+
+		System.out.println("//// List_2 ////");
+		System.out.println("//// List_2(i) = (i+1)*List_1(i) ////");
+		List_mult("List_2", List_2);
+		Display_List("List_2", List_2);
+
+
+		System.out.println();
+		System.out.println("//// Remove each ODD element from List_1 ////");
+		List<Integer> List_1_ODD = new ArrayList<>();
+		List_1_ODD = List_1;
+		Remove_odd_Number("List_1_ODD", List_1_ODD);		
+		Display_List("List_1_ODD" , List_1_ODD);
+
+		System.out.println();
+		System.out.println("//// Remove each EVEN element from List_2 ////");
+		List<Integer> List_2_EVEN = new ArrayList<>();
+		List_2_EVEN = List_2;
+		Remove_even_Number("List_2_EVEN", List_2_EVEN);
+		Display_List("List_2_EVEN" , List_2_EVEN);
+
+		System.out.println();
+		System.out.println("//// SUM element from List_1 and List_2 ////");
+		List<Integer> List_3_SUM = new ArrayList<>();
+		for(int j =0 ; j<List_1.size() ;j++ )
+		{
+			List_3_SUM.add(List_1.get(j) + List_2.get(j));
+		}
+		Display_List("List_3_SUM" , List_3_SUM);
+
+		System.out.println();
+		System.out.println("//// Sort element from List_3 ////");
+		List<Integer> List_3_SORT = new ArrayList<>();
+		for(int k = 0 ; k< List_1.size() ; k++)
+		{
+			List_3_SORT.add(List_3_SUM.get(k));
+		}	
+		Collections.sort(List_3_SORT);
+		Display_List("List_3_SORT" , List_3_SORT);
+
+	}
+
+	public static void Display_List(String List_name, List<Integer> list)
+	{
+
+		System.out.print(List_name + " = [");
+
+		for(int i =0 ; i< list.size() ; i++)
+		{
+			System.out.print(list.get(i) + ", ");
+		}
+
+		System.out.println("]");
+	}
+
+	public static void List_mult(String List_name, List<Integer> list)
+	{
+		for(int i = 0 ; i<list.size() ; i++)
+		{
+			list.set(i, list.get(i)*(i+1));
+		}
+	}
+	public static void Remove_odd_Number(String List_name, List<Integer> list)
+	{
+		for(int i=0 ; i<list.size(); i++)
+		{
+			if(i%2==1)
+			{
+				list.set(i, 0);
+			}
+		}
+		for(int i=0 ; i<list.size(); i++)
+		{
+			if(list.get(i)==0)
+			{
+				list.remove(i);
+			}
+		}
+	}
+	public static void Remove_even_Number(String List_name, List<Integer> list)
+	{
+		for(int i=0 ; i<list.size(); i++)
+		{
+			if(i%2==0)
+			{
+				list.set(i, 0);
+			}
+		}
+		for(int i=0 ; i<list.size(); i++)
+		{
+			if(list.get(i)==0)
+			{
+				list.remove(i);
+			}
+		}
+	}
+}
+
+/////////////////////////////////////////////////////////////
+
+package dynamic_array_test;
+import java.util.Scanner;
+public class test002 {
+	static int Array[];
+	static int array_capacity = 5;
+	static int inserted_number = 0;
+		public static void main(String[] args) {
+			System.out.println("Arrays, Limitations, Example 1");
+			Array =new int[array_capacity];
+				for (int i =0 ; i<array_capacity; i++)
+				{
+					Array[i]=0;
+				}
+			Display_array(Array);
+			Scanner sc = new Scanner (System.in);
+			boolean Process = true;
+			int inserted_number = 0;
+			while (Process)
+			{
+				if(inserted_number>=array_capacity) //// array_capacity=5)
+						{
+					////increase array size////
+					Increase_array_size();
+					System.out.println("----!!!!! Increase array size !!!!--");
+						}
+				System.out.print("Please insert an number with the index #");
+				System.out.print(inserted_number); System.out.print(":");
+				Array[inserted_number] = sc.nextInt();
+				Display_array(Array);
+				inserted_number++;
+			}
+		}
+public static void Increase_array_size()
+{
+	////step 1 : create a new temp array with size (array_capacity+1)
+	int Temp[]= new int[array_capacity+1];//// temp with size 6
+	////step 2 copy data from Array to temp
+	for (int i=0; i<array_capacity; i++)
+	{
+		Temp[i] = Array[i];
+	}
+	Array = Temp;
+	////Array[] = {2,5,7,9,6,x}
+	//// update array capacity
+	array_capacity++;
+}
+	public static void Display_array(int []array_in)
+	{
+		System.out.print("Array[] =");
+		for (int i=0; i<array_capacity; i++)
+		{
+			System.out.print(array_in[i]);
+			System.out.print(",");
+		}
+		////Display array size(array_capacity)
+		System.out.print(" : Array size");System.out.print(array_capacity);
+		System.out.println();
+	}
+}
+/////////////////////////////////////////////////////////////
+import java.util.Scanner;
+public class dynamic_array_002_subject {	
+	static int Array[];
+	static int array_capacity =5;
+	public static void main(String[] args) {		
+		System.out.println("video, dynamic arrays, example 4, final");		
+		Array = new int[array_capacity];		
+		///0,1,2,3,4 to array		
+		for (int i =0 ; i<array_capacity; i++)
+		{
+			Array[i] =i;
+		}		
+		Display_array(Array);		
+		/// infinite loop to insert elements to array		
+		Scanner sc = new Scanner(System.in);		
+		boolean Process = true;		
+		int Removed_index,insert_index,inserted_element ;		
+		int choice;		
+		while(Process)
+		{
+		    System.out.print("Type '1' to insert, or '2' to remove:");
+			choice = sc.nextInt();			
+			if (choice ==1) /// add element to array
+			{
+			    System.out.print("Add new element : Please type index#:");
+				insert_index = sc.nextInt();			    
+			    System.out.print("Add new element : Please type number#:");
+				inserted_element = sc.nextInt();				
+				Add_New_element(insert_index,inserted_element);
+				Display_array(Array);				
+			}
+			else if(choice ==2) //// remove element from array
+			{
+				if(array_capacity>2)
+				{
+				System.out.print("Remove element : Please type index#:");	
+				Removed_index = sc.nextInt();				
+				if(Removed_index < array_capacity) //if array capacity =5, valid removedindex =01234
+				{
+					////remove element with index removed_index from array
+					RemoveElement(Removed_index);
+				    System.out.println("-----!!!!!-----");
+				    System.out.println("Element is removed");
+				}
+				else
+				{
+				    System.out.println("-----!!!!!-----");
+				    System.out.println("Impossible to remove, insert a valid index");
+				}
+				Display_array(Array);
+				}
+				else
+				{
+					System.out.println("-----!!!!!-----");
+					System.out.println("Impossible to remove, minimum array ize is 2");
+					//Process = false; //// while loop will be stopped
+				}				
+			}			
+			///////////*
+			if(array_capacity>2)
+			{
+				System.out.print("Type the index of element to be removed #:");
+				
+				Removed_index = sc.nextInt();
+				
+				if(Removed_index < array_capacity) //if array capacity =5, valid removedindex =01234
+				{
+					////remove element with index removed_index from array
+					RemoveElement(Removed_index);
+				    System.out.println("-----!!!!!-----");
+				    System.out.println("Element is removed");
+				}
+				else
+				{
+				    System.out.println("-----!!!!!-----");
+				    System.out.println("impossible to remove, insert a valid index");
+				}
+				Display_array(Array);
+			}
+			else
+			{
+				System.out.println("-----!!!!!-----");
+				System.out.println("Impossible to remove, minimum array size is 2");
+				Process = false; //// while loop will be stopped				
+			}
+			*////////////////
+		}
+	}	
+	public static void Add_New_element(int index, int element)
+	{
+		if(index >= array_capacity)		
+		{
+			///increase an array size
+			Increase_array_size_advanced(index);///array [] = 0 10 0 0 7 0 0 0 0			
+		}
+		Array[index] = element;		////array [] = 0 10 0 0 7 0 0 0 2		
+	}	
+	public static void Increase_array_size_advanced(int array_size)
+	{
+		////step 1 : create array with the size array size
+		int Temp[]= new int[array_size +1];//// temp with size 6		
+		///add 0 to temp
+		////step 2 copy data from Array to temp
+		for (int i=0; i<array_size; i++)///temp size is 6
+		{
+			Temp[i] = 0;
+		}		
+		for (int i=0; i<array_capacity; i++)///array capacity is 5
+		{
+			Temp[i] = Array[i];
+		}
+		Array = Temp;
+		////Array[] = {2,5,7,9,6,x}
+		//// update array capacity
+		array_capacity=array_size +1;
+	}	
+	public static void RemoveElement(int index_remove)
+	{
+		///create a temp array with the size array capacity -1
+		int Temp[]= new int [array_capacity-1]; ///Temp[] = x,x,x,x		
+		/// copy elements from array to temp
+		for (int i=0; i<array_capacity;i++) ///i=01234
+		{
+			///copy elements with index i< index_remove
+			if(i<index_remove) ///i=01
+			{
+				Temp[i]=Array[i];
+			}
+			else if(i>index_remove)//i=34
+			{
+				Temp[i-1] =Array[i]; ///i=3, new_i =2  i=4, new_i=3
+			}			
+		}
+		Array=Temp; ///array[] = 0134 size =4
+		array_capacity--; ///array capcacity =4		
+	}	
+	public static void Display_array(int []array_in)
+	{
+		System.out.print("Array[]=");
+		for(int i=0; i <array_capacity; i++)
+		{
+			System.out.print(array_in[i]);
+			System.out.print(", ");
+		}
+		///Display array size (arraycapacity)
+		System.out.print(" : Array size =");
+		System.out.print(array_capacity);
+		System.out.println();
+	}	
+}
+/////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+public class List_practice_example_1_video {
+public static void main(String[] args) {
+System.out.println("List practice #1");
+System.out.println("/////    ArrayList    /////");
+System.out.println("/////    String    /////");
+/// type      list  name
+List<String> myList_string = new ArrayList<>();   /// empty list
+myList_string.add("Elena");   /// int : 0 and add is placing element at the end of the list
+myList_string.add("Tom");   /// int : 1
+myList_string.add("Jim");   /// int : 2
+myList_string.add("Alice");   /// int : 3
+myList_string.forEach(System.out::println);
+System.out.println("//////////////////////////");
+System.out.println("/////  Delete 'Jim'  /////");
+myList_string.remove(2);
+myList_string.forEach(System.out::println);
+System.out.println("//////////////////////////");
+System.out.println();
+System.out.println("/////   Integer  /////////");
+/// List of integer numbers
+//List<Integer> myList_int = new ArrayList<>();   /// make an empty integer list
+List<Integer> myList_int = new ArrayList<>(List.of(7, 10, 8, 2, 5));
+Display_List("myList_int", myList_int);
+System.out.println("//////////////////////////");
+System.out.println("Add 56, at the position 3");
+myList_int.add(3,56);
+Display_List("myList_int", myList_int);
+System.out.println("Add 23, at the position 1");
+myList_int.add(1,23);
+Display_List("myList_int", myList_int);
+System.out.println("Remove 10, int the position 2");
+myList_int.remove(2);
+Display_List("myList_int", myList_int);
+System.out.println("Add 11 at the end of the list");
+myList_int.add(11);
+Display_List("myList_int", myList_int);
+System.out.println("//////////////////////////");
+System.out.println();
+System.out.println("/////    Float   /////////");
+System.out.println("Add 1.34, 3.14, 0.000234");
+List<Float> myList_float = new LinkedList<>(); /// empty list
+myList_float.add(1.34f);     /// 1.34 is double, 1.34f is float
+Display_List_float("myList_float", myList_float);
+myList_float.add(3.14f);     /// 3.14 is double, 3.14f is float
+Display_List_float("myList_float", myList_float);
+myList_float.add(0.000123f); /// 0.000123 is double, 0.000123f is float
+Display_List_float("myList_float", myList_float);
+myList_float.add(0, 10.1f); /// add 10.1 in the position 0
+Display_List_float("myList_float", myList_float);
+System.out.println("//////////////////////////");
+System.out.println();
+System.out.println("/////    Sort list   /////////");
+Collections.sort(myList_float);   /// sort list
+Display_List_float("myList_float", myList_float
+);
+}
+public static void Display_List_float(String list_name, List<Float> list)
+{
+System.out.print(list_name + " = [");
+for( int i=0 ; i<list.size(); i++)
+{
+System.out.print(list.get(i) + ", ");
+}
+System.out.println
+("], list_size : " + list.size());
+}
+public static void Display_List(String list_name, List<Integer> list)
+{
+System.out.print(list_name + " = [");
+for( int i=0 ; i<list.size(); i++)
+{
+System.out.print(list.get(i) + ", ");
+}
+System.out.println
+("], list_size : " + list.size());
+}
+}
+/////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+public class List_practice_example_1_video {
+	public static void main(String[] args) {
+		System.out.println("List practice #1");
+		System.out.println("/////    ArrayList    /////");
+		System.out.println("/////    String    /////");		
+		/// type      list  name
+		List<String> myList_string = new ArrayList<>();   /// empty list
+		myList_string.add("Elena");   /// int : 0 and add is placing element at the end of the list
+		myList_string.add("Tom");   /// int : 1
+		myList_string.add("Jim");   /// int : 2
+		myList_string.add("Alice");   /// int : 3
+		myList_string.forEach(System.out::println);
+		System.out.println("//////////////////////////");
+		System.out.println("/////  Delete 'Jim'  /////");
+		myList_string.remove(2);
+		myList_string.forEach(System.out::println);
+		System.out.println("//////////////////////////");
+		System.out.println();
+		System.out.println("/////   Integer  /////////");
+		/// List of integer numbers		
+		//List<Integer> myList_int = new ArrayList<>();   /// make an empty integer list		
+		List<Integer> myList_int = new ArrayList<>(List.of(7, 10, 8, 2, 5));
+		Display_List("myList_int", myList_int);
+		System.out.println("//////////////////////////");
+		System.out.println("Add 56, at the position 3");
+		myList_int.add(3,56);
+		Display_List("myList_int", myList_int);		
+		System.out.println("Add 23, at the position 1");
+		myList_int.add(1,23);
+		Display_List("myList_int", myList_int);		
+		System.out.println("Remove 10, int the position 2");
+		myList_int.remove(2);
+		Display_List("myList_int", myList_int);		
+		System.out.println("Add 11 at the end of the list");
+		myList_int.add(11);
+		Display_List("myList_int", myList_int);		
+		System.out.println("//////////////////////////");
+		System.out.println();
+		System.out.println("/////    Float   /////////");
+		System.out.println("Add 1.34, 3.14, 0.000234");		
+		List<Float> myList_float = new LinkedList<>(); /// empty list		
+		myList_float.add(1.34f);     /// 1.34 is double, 1.34f is float
+		Display_List_float("myList_float", myList_float);				
+		myList_float.add(3.14f);     /// 3.14 is double, 3.14f is float
+		Display_List_float("myList_float", myList_float);		
+		myList_float.add(0.000123f); /// 0.000123 is double, 0.000123f is float
+		Display_List_float("myList_float", myList_float);		
+		myList_float.add(0, 10.1f); /// add 10.1 in the position 0
+		Display_List_float("myList_float", myList_float);		
+		System.out.println("//////////////////////////");
+		System.out.println();
+		System.out.println("/////    Sort list   /////////");		
+		Collections.sort(myList_float);   /// sort list		
+		Display_List_float("myList_float", myList_float
+				);		
+	}
+	public static void Display_List_float(String list_name, List<Float> list)
+	{
+		System.out.print(list_name + " = [");
+		for( int i=0 ; i<list.size(); i++)
+		{
+			System.out.print(list.get(i) + ", ");
+		}
+		System.out.println
+		("], list_size : " + list.size());		
+	}	
+	public static void Display_List(String list_name, List<Integer> list)
+	{
+		System.out.print(list_name + " = [");
+		for( int i=0 ; i<list.size(); i++)
+		{
+			System.out.print(list.get(i) + ", ");
+		}
+		System.out.println
+		("], list_size : " + list.size());		
+	}
+}
+/////////////////////////////////////////////////////////////////////////
+import java.util.LinkedList;
+import java.util.List;
+public class List_practice_example_2_video {
+	public static void main(String[] args) {
+		System.out.println("         List practice #2");
+		System.out.println("/////    LinkedList                           /////");
+		System.out.println("/////    Package sorting tecnique(Youtube)    /////");		
+		/// Create a set of package received by user 2 {3, 1, 4, 5, 7,...}		
+		int random_sequence[] = {3,1,4,5,7,8,9,2,6,11,13,10,12,15,14}; /// package index		
+		String Case_number = "";		
+		/// assume packages are arrinving one by one, process sorting
+		int current_package_ID, add_index;		
+		/// Lets create a list for local sorting		
+		List <Integer> Video_list = new LinkedList<>();		
+		Video_list.add(random_sequence[0]);		
+		Display_List("Video_list", Video_list);		
+		for(int i=1 ; i<15 ; i++)
+		{
+			///received paccage ID
+			current_package_ID = random_sequence[i]; //// current_package_ID = 4, if i =2			
+			/// case 1 (add element at the beginning, list index = 0)
+			if (Video_list.get(0)>current_package_ID)
+			{
+				Video_list.add(0,current_package_ID); /// video_list ={1,3}
+				Case_number = "1";
+				add_index=0;
+			}			
+			///case 2 (add element at the end of the list, list index = video_list.size()-1)			
+			///video_list.size()-1 /// the index of the last element from the list
+			///         3                                     4
+			else if (Video_list.get(Video_list.size()-1)<current_package_ID) /// List = {1,3}, current_package_ID = 4
+			{
+				Video_list.add(current_package_ID);
+				Case_number = "2";
+				add_index = Video_list.size()-1;
+			}
+			else
+			{						
+			/// case 3 (add element in the specified location)
+		    //// current_package_ID = 2, if i =7
+     		//// video_list ={1,2,3,4,5,7,8,9,}
+			/// list index = 5?
+			int index_case_3=1;
+			///       7                               6                 index_case_3 = 5
+			while(Video_list.get(index_case_3)<current_package_ID)
+			{
+				index_case_3++;  ///index_case_3 = 5
+			}
+			Video_list.add(index_case_3, current_package_ID);		
+			Case_number = "3";		
+			add_index = index_case_3;			
+			}			
+			System.out.print("i:" + i + ", add(" + current_package_ID +"), index: " + add_index + ", case " + Case_number + ": ");			
+			Display_List("Video_list", Video_list);			
+		}		
+	}
+	public static void Display_List(String list_name, List<Integer> list)
+	{
+		System.out.print(list_name + " = [");
+		for( int i=0 ; i<list.size(); i++)
+		{
+			System.out.print(list.get(i) + ", ");
+		}
+		System.out.println
+		("], list_size : " + list.size());		
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.Stack;
+public class Stack_practice_in_class_1 {
+	public static void main(String[] args) {
+		Stack<String> myStack = new Stack<>();
+		myStack.push("Sunday");
+		myStack.push("Monday");
+		myStack.push("Tuesday");
+		myStack.push("Wednesday");
+		myStack.push("Thursday");
+		myStack.push("Friday");
+		myStack.push("Saturday");		
+		System.out.println("Elements of Stack : " + myStack);		
+		System.out.println("////   Use myStack.pop()    ////");		
+		String last_Stack_element = myStack.pop(); /// read and remove "Saturday"				
+		System.out.println("myStack.pop() : " + last_Stack_element);		
+		System.out.println("Elements of Stack : " + myStack);		
+		String last_Stack_element_2 = myStack.pop(); /// read and remove "Friday"		
+		System.out.println("myStack.pop() : " + last_Stack_element_2);
+				System.out.println("Elements of Stack : " + myStack);		
+		System.out.println("Is the myStack empty? " + myStack.empty());
+		System.out.println("myStack size : " + myStack.size());		
+		/// search ///		
+		int index = myStack.search("Monday");		
+		System.out.println("Search for 'Monday' in myStack : index is  -  " + index);		
+		System.out.println();		
+		/// peek ///		
+		String last_element_to_peek = myStack.peek(); ///read and remove "Thursday"		
+		System.out.println("myStack.peek() :  " + last_element_to_peek);		
+		System.out.println("Elements of Stack : " + myStack);		
+		System.out.println();		
+        String last_element_to_pop = myStack.pop(); ///read and remove "Thursday"		
+		System.out.println("myStack.pop() :  " + last_element_to_pop);		
+		System.out.println("Elements of Stack : " + myStack);		
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////
+import java.util.LinkedList;
+import java.util.List;
+
+public class Midterm_pr1_JinSang_ho_201521431 {
+
+	public static void main(String[] args) {
+		System.out.println("Midterm practice. Ploblem 1");
+		System.out.println("reshape function, and mean");
+		
+		List<Integer> array_1d = new LinkedList<>(List.of(1,2,3,3,4,6));
+		
+		Display_list_and_mean("array_1d", array_1d);
+		
+		int array_2d [][] = new int [2][3];
+		
+		int index = 0;
+		
+		for(int i=0 ; i<2 ; i++)
+		{
+			for(int j =0 ; j<3 ; j++)
+			{
+				array_2d[i][j] = array_1d.get(index);
+				index++;
+			}
+		}
+		System.out.println();
+		Display_2d_array("array_2d", array_2d,2,3);
+		
+		int i,j;
+		
+		for(int index2=0 ; index2<6 ; index2++)
+		{
+			i= index2 % 2;
+			j= index2 / 2;
+			
+			array_2d[i][j] = array_1d.get(index2);
+		}
+		System.out.println();
+		Display_2d_array("array_2d",array_2d,2,3);
+		
+		List<Integer> array_2d_new = new LinkedList<>(List.of(3, 7, 5, 1, 3, 9));
+		System.out.println();
+		Display_list_and_mean("array_2d_new", array_2d_new);		
+		int[][] array_3d = reshape(array_2d_new,3,2);
+		
+		System.out.println();
+		Display_2d_array("array_3d",array_3d,3,2);
+		
+		List<Integer> array_3d_new = new LinkedList<>(List.of(3, 7, 5, 1, 3, 9, 4, 5, 6, 7, 3, 4));
+		System.out.println();
+		Display_list_and_mean("array_3d", array_3d_new);
+		int[][] array_3d_big = reshape(array_3d_new,3,4);		
+		System.out.println();
+		Display_2d_array("array_3d",array_3d_big,3,4);
+		
+		int[][] array_3d_big2 = reshape(array_3d_new,2,6);		
+		System.out.println();
+		Display_2d_array("array_3d",array_3d_big2,2,6);
+	}
+	
+	public static int[][] reshape(List<Integer> list, int h, int w)
+	{
+		int output_array[][] = new int[h][w];
+		int index=0;
+		for(int i=0 ; i< h ; i++)
+		{
+			for(int j=0 ; j< w ; j++)
+			{
+				output_array[i][j] = list.get(index);
+				index++;
+			}
+		}
+		return output_array;
+	}
+	
+	public static void Display_2d_array(String array_name, int[][] array_input,int h, int w)
+	{
+		
+		System.out.print(array_name + " =  ");
+		for(int i=0 ; i<h ; i++)
+		{
+			double mean=0;
+			for(int j =0 ; j<w ; j++)
+			{
+				mean = mean +array_input[i][j];
+				System.out.print(array_input[i][j] + ", ");
+			}
+			System.out.println(" mean = "+ (int)(mean*100/3)/100.0 );
+			System.out.print("            ");			
+		}
+		
+	}
+	
+	public static void Display_list_and_mean(String list_name, List<Integer> list)
+	{
+		double mean=0;
+		
+		System.out.print(list_name + " = [ ");
+		for(int i=0 ; i<list.size(); i++)
+		{
+			mean = mean +list.get(i);
+			System.out.print(list.get(i) + ", ");
+		}
+		System.out.println("], mean : " + (int)(mean*100/list.size())/100.0 );
+		
+	}
+	
+	
+	
+
+}
