@@ -1,0 +1,135 @@
+package midterm;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class midterm_task1 {
+
+	public static void main(String[] args) {
+		System.out.println("/////////////////////////////////////");
+		System.out.println("///      midterm. problem 1.     ///");
+		System.out.println("1) Create an ArrayList 'mylist' of [4,7,1,6,9,2,0,4,1,8] ");
+		
+		List<Integer> myList = new ArrayList<>(List.of(4,7,1,6,9,2,0,4,1,8));
+		System.out.println("myList = " + myList);
+		
+		System.out.println("Create a function 'compute_mean(myList)");
+		
+		compute_mean(myList);
+		
+		System.out.println("and compute mean of 'myList' : mean = " + compute_mean(myList));
+		
+		
+		
+		
+		
+	}
+	
+	public static float compute_mean(List<Integer> list)
+	{
+		float mean =0;
+		for(int i=0 ; i<list.size(); i++)
+		{
+			mean= mean + list.get(i);
+			
+		}
+		float compute_mean = mean / list.size();
+		
+		return compute_mean;
+	}
+	
+}
+/////////////////////////////////////////////////////////////////////
+package midterm_pr_class;
+
+import java.util.List;
+import java.util.Stack;
+
+public class midterm_pr2 {
+
+	public static void main(String[] args) {
+		System.out.println("/////////////////////////////////");
+		System.out.println("///      midterm. Problem2    ///");
+		System.out.println("1) Create an Integer stack myStack_int of (6,8,2,4,7)");
+		
+		Stack<Integer> myStack_int = new Stack<>();
+		
+		myStack_int.push(6);
+		myStack_int.push(8);
+		myStack_int.push(2);
+		myStack_int.push(4);
+		myStack_int.push(7);
+		System.out.println("'myStack_int' = "+myStack_int);
+		System.out.println("2) Create a function 'compute_variance(myStack_int)");
+		System.out.println("Variance = " + compute_variance(myStack_int));
+		
+		System.out.println("3) Create a function 'compute_standard_deviation(myStack_int)");
+		System.out.println("Standard_deviation = " + compute_standard_deviation(myStack_int));
+		
+		System.out.println("4) Create a function 'Sample_compute_standard_deviation(myStack_int)");
+		System.out.println("Sample_Standard_deviation = " + compute_standard_deviation(myStack_int));
+		
+		
+		
+	}
+	
+	public static float compute_standard_deviation(Stack<Integer> stack)
+	{
+		//standard deviation
+		/*float mean =compute_mean(stack);
+		float variance = compute_variance(stack);
+		
+		return (float)Math.sqrt(variance);*/
+		
+		
+		//sample standard deviation 
+		/*
+		float mean = compute_mean(stack);
+		System.out.println("mean =" + mean);
+		
+		float variance = 0;
+		for(int i=0 ; i<stack.size(); i++)
+		{
+			variance = variance + (stack.get(i) -mean)*(stack.get(i) -mean);
+			
+		}
+		return (float)Math.sqrt(variance/stack.size()-1);
+		*/
+		//sample standard deviation 2
+		return (float)Math.sqrt((compute_variance(stack)*stack.size()/(stack.size()-1)));		
+		
+		
+		
+	}
+	
+	public static float compute_variance(Stack<Integer> stack)
+	{
+		float mean = compute_mean(stack);
+		System.out.println("mean =" + mean);
+		
+		float variance = 0;
+		for(int i=0 ; i<stack.size(); i++)
+		{
+			variance = variance + (stack.get(i) -mean)*(stack.get(i) -mean);
+			
+		}
+		
+		
+		return variance/stack.size();
+	}
+	public static float compute_mean(Stack<Integer> stack)
+	{
+		float mean =0;
+		for(int i=0 ; i<stack.size(); i++)
+		{
+			mean= mean + stack.get(i);
+			
+		}
+		float compute_mean = mean / stack.size();
+		
+		return compute_mean;
+	}
+
+}
+
+/////////////////////////////////////////////////////////////////////
