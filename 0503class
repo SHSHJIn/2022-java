@@ -1,0 +1,101 @@
+package alg_1_Dijkstra_in_class;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class alg_1_Dijkstra_in_class {
+
+	public static void main(String[] args) {
+		//Dijkstra's two_Stack Algorithm for Expression Evaluation
+		
+		//Stacks and Queues
+		
+		String s = "( ( 1 + 2 ) * 3 )";
+		
+		//// String s = "( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
+		//// String s = "";
+		
+		
+		
+		
+		Dijkstra_algorithm_Print_Result(s);
+		
+		
+	}
+	
+	public static void Dijkstra_algorithm_Print_Result(String input_str)
+	{
+		String str_split[] = input_str.split("\\s+");
+		
+		Queue<String> queue = new LinkedList<>();
+		
+		queue.addAll(Arrays.asList(str_split));
+		
+		System.out.println("queue = " + queue);
+		
+		Stack<String> oper = new Stack<>();
+		Stack<Double> val = new Stack<>();
+		
+		//// loop ////
+		
+		while(!queue.isEmpty())   /// !(논리연산 중 !) process if queue is noe empty
+		{
+			String current_symbol = queue.poll();   // read and delete from queue
+			
+			if(current_symbol.equals("("))
+			{
+				//// case 1) skip
+			}
+			else if(current_symbol.equals("+") || current_symbol.equals("-") || current_symbol.equals("*"))
+			{
+				//// case 2) operators "+" , "-" , "*"
+				oper.push(current_symbol);
+			}
+			else if(current_symbol.equals(")")) 
+			{
+				//// case 4) process calculation
+				//// read and delete last operator
+				String Current_operator = oper.pop();
+				//// read and delete 2 last numbers
+				double num1 = val.pop(); /// 2
+				double num2 = val.pop(); /// 1
+				
+				double result =0;
+				
+				////compute
+				
+				if(Current_operator.equals("+")) //// +
+				{
+					result = num1 + num2;
+				}
+				else if(Current_operator.equals("-")) //// -
+				{
+					result = num1 - num2;
+				}
+				else //// *
+				{
+					result = num1 * num2;
+				}
+				val.push(result);
+				
+			}
+			else //// current_symbol = 0,1,2,3,4,5,6,7,8,9
+			{
+				//// case 3) numbers
+				val.push(Double.parseDouble(current_symbol));
+			}
+			//// Display all elements in val and oper
+			System.out.println("current symbol = " + current_symbol);
+			System.out.println("oper = " + oper);
+			System.out.println("val = " + val);
+			System.out.println("-----------------------");
+			System.out.println();
+			
+		}
+		System.out.println(input_str + " = " + val.pop());
+		
+		
+	}
+}
