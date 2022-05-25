@@ -1,0 +1,69 @@
+package alg_2_move_to_fornt_video;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class alg_2_move_to_front_video {
+
+	public static void main(String[] args) {
+		
+		System.out.println("!!!!!     Move to front algoritm     !!!!!");
+		
+		String input_str = "t h e q u i c k b r o w n f o x j u m p s o v e r t h e l a z y d o g";
+		//String input_str = "a b c a d";
+		
+		String str_split[] = input_str.split("\\s+");
+		Queue<String> input_sequence = new LinkedList<>();
+		
+		input_sequence.addAll(Arrays.asList(str_split));
+		
+		System.out.println("Input elements = " + input_sequence);
+		
+		//// Create a LinkedList "output" for no duplicate elements
+		
+		List<String> output_sequence = new LinkedList<>(); //// empty : output_sequence = []
+		
+		String current_element = "";
+		System.out.println("Implement move to front strategy");
+		int i=0;
+		
+		while(!input_sequence.isEmpty()) /// process while untill input_sequence is noe empty
+		{
+			/// read first element from the queue
+			current_element = input_sequence.poll(); //read and remove current_element='a'
+			
+			System.out.println("i: " +i + " )Process: " + current_element);
+			
+			//case 1
+			if(!output_sequence.contains(current_element)) /// if current_element unseen
+			{
+				output_sequence.add(0, current_element); //add first position
+				System.out.print("Current element: "+current_element +", is not exist. ");
+				System.out.println("Add (" + current_element + ") at the front of the \"output_sequence\"");
+			}
+			//case 2
+			else /// current_element is duplicate
+			{
+				System.out.print("Current element: "+current_element +", is duplicate. ");
+				System.out.println("Remove (" + current_element + ") from the \"output_sequence\"");
+				///remove duplicate element from output_sequence
+				int index_to_remove = output_sequence.indexOf(current_element);
+				output_sequence.remove(index_to_remove);
+				System.out.println("(Remove): output_sequence = " + output_sequence);
+				output_sequence.add(0, current_element);
+				System.out.print("Reinsert {" + current_element + "} at the beginning of \"output_sequence\"");
+			}
+			
+			System.out.println("output_sequence = " + output_sequence);
+			//System.out.println("input_sequence = " + input_sequence);
+			System.out.println("--------------------------------");
+			
+			i++;
+		}
+		
+		
+	}
+}
+
