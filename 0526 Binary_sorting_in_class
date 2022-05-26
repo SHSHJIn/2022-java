@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Binary_sorting_practice {
+
+	public static void main(String[] args) {
+		
+		System.out.println("---- Binary sorting ----");
+		System.out.println("");
+		
+		List<Integer> initList = new ArrayList<>(List.of(9, 5, 6, 0, 3));
+		
+		//// binary sorting ////
+		
+		List<Integer> sortedList = Binary_sorting_list(initList);
+		
+		
+		
+		
+		
+		
+	}
+	public static List<Integer> Binary_sorting_list(List<Integer> input_list)
+	{
+		int number_1,number_2,Buffer;
+		String info = "";
+		//// step = 0,1,2,3
+		for(int step = 0 ; step<input_list.size()-1;step++)
+		{
+			//// substep = 1,2,3,4
+			for(int substep = step+1;substep<input_list.size();substep++)
+			{
+				System.out.print("Step: "+step+", substep: "+substep+"   " );
+				
+				number_1 = input_list.get(step);
+				number_2 = input_list.get(substep);
+				info = "skip";
+				if(number_1>number_2) //// swap
+				{
+					info = "swap";
+					Buffer = input_list.get(step); //// buffer = 9
+					input_list.set(step, input_list.get(substep)); //// input_list = 5,5,6,0,3
+					input_list.set(substep, Buffer);
+				}
+				System.out.println(input_list +",  "+info);
+			}			
+		}		
+		return input_list;
+	}
+
+}
