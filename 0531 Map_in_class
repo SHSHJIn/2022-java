@@ -1,0 +1,93 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class map_practice {
+
+	public static void main(String[] args) {
+		System.out.println("////////////////////////////");
+		System.out.println("/////   Map Practice   /////");
+		System.out.println("////////////////////////////");
+		System.out.println("1) Make a simple map ");
+		
+		///  key, value
+		Map<Integer, String> simple_map = new HashMap<>();
+		
+		///   Integer        String
+		///  key            value
+		/// student ID      student name
+		///   101             John
+		///   103             Mark
+		///   110             Alice
+		
+		simple_map.put(101, "John");
+		simple_map.put(103, "Mark");
+		simple_map.put(110, "Alice");
+		
+		System.out.println("Simple_map = " + simple_map);
+		System.out.println("Simple_map(key) = " + simple_map.keySet());
+		System.out.println("Simple_map(values) = " + simple_map.values());
+		System.out.println("Simple_map(entries) = " + simple_map.entrySet());
+		
+		System.out.println("");
+		System.out.println("2) Remove map's cell with key 103 - > Mark");
+		
+		simple_map.remove(103);		
+		System.out.println("Simple_map = " + simple_map);
+		
+		System.out.println("");
+		System.out.println("3) Update map's cell with key 110 - > frome 'Alice' to 'Alice, Kim'");
+		simple_map.replace(110, "Alice, Kim");
+		System.out.println("Simple_map = " + simple_map);
+		
+		System.out.println("");
+		System.out.println("4) make a Map<String, Integer> simple_map_2");
+		
+		///   key             value
+		///   student name    grade
+		///   John            90
+		///   Mark            85
+		///   Alice           100
+				
+		Map<String, Integer> simple_map_2 = new HashMap<>();
+		
+		simple_map_2.put("John", 90);
+		simple_map_2.put("Mark", 85);
+		simple_map_2.put("Alice", 100);
+		
+		System.out.println("Simple_map_2 = " + simple_map_2);
+		
+		System.out.println("");
+		System.out.println("Display Map using iterator"); 
+		
+		for(Map.Entry mapElement: simple_map_2.entrySet())
+		{
+			String currentkey = (String) mapElement.getKey();
+			
+			int current_grade = (Integer) mapElement.getValue();
+			
+			System.out.println("key: " +currentkey +", value: " + current_grade);
+			
+		}
+		
+		System.out.println("");
+		System.out.println("5) Update map's cell with key 'John' from 90 to 100");
+		
+		simple_map_2.replace("John", 100);
+		System.out.println("Simple_map_2 = " + simple_map_2);
+		
+		System.out.println("");
+		System.out.println("6) Map with sorting");
+		
+		Map<Integer, String> simple_map_3 = new TreeMap<>();
+		
+		simple_map_3.put(3, "Boxes");
+		simple_map_3.put(1, "Apples");
+		simple_map_3.put(10, "Jyuce");
+		simple_map_3.put(7, "Orange");
+		
+		System.out.println("Simple_map_3 = " + simple_map_3);
+		
+	}
+
+}
