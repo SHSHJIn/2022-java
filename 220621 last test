@@ -1,0 +1,947 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class Dijkstra_algorithm {
+
+	public static void main(String[] args) {
+		//Dijkstra's two_Stack Algorithm for Expression Evaluation
+		//Stacks and Queues
+		////String s = "( ( 1 + 2 ) * 3 )";
+		String s = "( ( ( 5 * ( 1 + 2 ) ) + 3 ) - ( ( 2 + 7 ) * 3 ) )";
+		//// String s = "( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
+		Dijkstra_algorithm_Print_Result(s);
+	}
+	public static void Dijkstra_algorithm_Print_Result(String input_str)
+	{
+		Stack<String> oper = new Stack<>();
+		Stack<Double> val = new Stack<>();
+		String str_split[] = input_str.split("\\s+");
+		Queue<String> queue = new LinkedList<>();
+		queue.addAll(Arrays.asList(str_split));
+		System.out.println("queue = " + queue);
+		//// loop ////
+
+		while(!queue.isEmpty())   /// !(논리연산 중 !) process in queue is not empty
+		{
+			String current_symbol = queue.poll();   // read and remove
+			if(current_symbol.equals("("))
+			{
+				//// case 1) skip
+			}
+			else if(current_symbol.equals("+") || current_symbol.equals("-") || current_symbol.equals("*"))
+			{
+				//// case 2) operators "+" , "-" , "*"
+				oper.push(current_symbol);
+			}
+			else if(current_symbol.equals(")")) 
+			{
+				//// case 4) process calculation
+				//// read and delete last operator
+				String Current_operator = oper.pop();
+				//// read and delete 2 last numbers
+				double num1 = val.pop(); /// 2
+				double num2 = val.pop(); /// 1
+				double result =0;
+				////compute
+				if(Current_operator.equals("+")) //// +
+				{
+					result = num2 + num1;
+				}
+				else if(Current_operator.equals("-")) //// -
+				{
+					result = num2 - num1;
+				}
+				else //// *
+				{
+					result = num2 * num1;
+				}
+				val.push(result);
+			}
+			else //// current_symbol = 0,1,2,3,4,5,6,7,8,9
+			{
+				//// case 3) numbers
+				val.push(Double.parseDouble(current_symbol));
+			}
+			//// Display all elements in val and oper
+			System.out.println("current symbol = " + current_symbol);
+			System.out.println("val = " + val);
+			System.out.println("oper = " + oper);
+			System.out.println("-------------");
+		}
+		System.out.println(input_str + " = " + val.pop());
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+package alg_2_move_to_fornt_video;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class alg_2_move_to_front_video {
+
+	public static void main(String[] args) {
+		
+		System.out.println("!!!!!     Move to front algoritm     !!!!!");
+		
+		String input_str = "t h e q u i c k b r o w n f o x j u m p s o v e r t h e l a z y d o g";
+		//String input_str = "a b c a d";
+		
+		String str_split[] = input_str.split("\\s+");
+		Queue<String> input_sequence = new LinkedList<>();
+		
+		input_sequence.addAll(Arrays.asList(str_split));
+		
+		System.out.println("Input elements = " + input_sequence);
+		
+		//// Create a LinkedList "output" for no duplicate elements
+		
+		List<String> output_sequence = new LinkedList<>(); //// empty : output_sequence = []
+		
+		String current_element = "";
+		System.out.println("Implement move to front strategy");
+		int i=0;
+		
+		while(!input_sequence.isEmpty()) /// process while untill input_sequence is noe empty
+		{
+			/// read first element from the queue
+			current_element = input_sequence.poll(); //read and remove current_element='a'
+			
+			System.out.println("i: " +i + " )Process: " + current_element);
+			
+			//case 1
+			if(!output_sequence.contains(current_element)) /// if current_element unseen
+			{
+				output_sequence.add(0, current_element); //add first position
+				System.out.print("Current element: "+current_element +", is not exist. ");
+				System.out.println("Add (" + current_element + ") at the front of the \"output_sequence\"");
+			}
+			//case 2
+			else /// current_element is duplicate
+			{
+				System.out.print("Current element: "+current_element +", is duplicate. ");
+				System.out.println("Remove (" + current_element + ") from the \"output_sequence\"");
+				///remove duplicate element from output_sequence
+				int index_to_remove = output_sequence.indexOf(current_element);
+				output_sequence.remove(index_to_remove);
+				System.out.println("(Remove): output_sequence = " + output_sequence);
+				output_sequence.add(0, current_element);
+				System.out.print("Reinsert {" + current_element + "} at the beginning of \"output_sequence\"");
+			}
+			System.out.println("output_sequence = " + output_sequence);
+			//System.out.println("input_sequence = " + input_sequence);
+			System.out.println("--------------------------------");
+			
+			i++;
+		}		
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class set_practice {
+
+	public static void main(String[] args) {
+		
+		System.out.println("------------------------");
+		System.out.println("----- Set practice -----");
+		
+		Set <Integer> set_1 = new HashSet<Integer>();
+		
+		set_1.add(5);
+		set_1.add(6);
+		set_1.add(8);
+		set_1.add(1);
+		set_1.add(0);
+		set_1.add(8);
+		set_1.add(1);
+		
+		System.out.println("HashSet: Set_1 = " + set_1);
+		System.out.println();
+		
+		System.out.println(" LinkedHashSet (example) ");
+		
+		Set <Integer> set_2 = new LinkedHashSet<Integer>();
+		set_2.add(5);
+		set_2.add(6);
+		set_2.add(8);
+		set_2.add(1);
+		set_2.add(0);
+		set_2.add(8);
+		set_2.add(1);
+		
+		System.out.println("HashSet: Set_2 = " + set_2);
+		
+		System.out.println("-------------------------------------------");
+		System.out.println("----- Union, Intersection, Difference -----");
+		
+		Set<Integer> a = new HashSet<Integer>();
+		
+		a.addAll(Arrays.asList(new Integer[] {1, 3, 2, 4, 8, 9, 0}));
+		
+		Set<Integer> b = new HashSet<Integer>();
+		
+		b.addAll(Arrays.asList(new Integer[] {1, 3, 7, 5, 4, 0, 7, 5}));
+		
+		System.out.println("a = " + a);
+		System.out.println("b = " + b);
+		
+		Set<Integer> union = new HashSet<Integer>();
+		
+		union.addAll(a);
+		union.addAll(b);
+		
+		System.out.println("Union:"+union);
+		
+		Set<Integer> Intersection = new HashSet<Integer>(a);
+		
+		Intersection.retainAll(b);
+		
+		System.out.println("Intersection:"+Intersection);
+		
+		Set<Integer> Difference1 = new HashSet<Integer>(b);
+		
+		Difference1.removeAll(a);
+		
+		Set<Integer> Difference2 = new HashSet<Integer>(a);
+		
+		Difference2.removeAll(b);
+		
+		Set<Integer> Difference = new HashSet<Integer>(Difference1);
+		
+		Difference.addAll(Difference2);
+		
+		System.out.println("Difference:" +Difference);
+		
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+package set;
+
+import java.util.ArrayDeque;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class set {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Queue<Integer> queue = new PriorityQueue();
+		
+		queue.add(10);
+		queue.add(20);
+		queue.add(30);
+		queue.add(40);
+		queue.add(50);
+		
+		System.out.println("remove head: "+queue.peek()+", queue = "+queue);
+		
+		queue.remove();
+		System.out.println("remove head: "+queue.peek()+", queue = "+queue);
+		
+		PriorityQueue<String> queue_str = new PriorityQueue<>();
+		
+		System.out.println("-----------------------------------------------");
+		System.out.println("String PriorityQueue: ");
+		
+		queue_str.add("Tom");
+		queue_str.add("Mike");
+		queue_str.add("Jim");
+		queue_str.add("Sam");
+		
+		System.out.println("head: "+queue_str.peek()+", queue_str = "+queue_str);
+		
+		queue_str.remove();
+		System.out.println("head: "+queue_str.peek()+", queue_str = "+queue_str);
+		
+		///comparator
+		System.out.println("-----------------------------------------------");
+		System.out.println("Comparator: ");
+		
+		Comparator<String> stringLengthComparator = new Comparator<String>(){
+			@Override
+			
+			public int compare(String s1, String s2)
+			{
+				return s1.length() - s2.length();
+			}
+		};
+		//글자의 길이가 더 짧은것이 먼저오도록 하는거
+		
+		PriorityQueue <String> namePriorityQueue = new PriorityQueue<>(stringLengthComparator);
+		
+		namePriorityQueue.add("Lisa");
+		namePriorityQueue.add("Robert");
+		namePriorityQueue.add("John");
+		namePriorityQueue.add("Chris");
+		namePriorityQueue.add("Angelina");
+		namePriorityQueue.add("Joe");
+		
+		System.out.println("head: "+namePriorityQueue.peek()+", queue_str = "+namePriorityQueue);
+		//sort using the length of letter
+		
+		namePriorityQueue.remove();
+		System.out.println("head: "+namePriorityQueue.peek()+", queue_str = "+namePriorityQueue);
+		
+		///Dequeue
+		System.out.println("-----------------------------------------------");
+		System.out.println("Dequeue: ");
+		//자료를 지우고 추가할 수 있다
+		
+		Deque<String> myDeque = new ArrayDeque();
+		
+		myDeque.add("hello");
+		myDeque.add("my");
+		myDeque.add("dear");
+		myDeque.add("friend");
+		
+		System.out.println("Deque = "+myDeque);
+		
+		myDeque.addFirst("message:");
+		System.out.println("Deque = "+myDeque);
+		
+		myDeque.addLast("whats up?");
+		System.out.println("Deque = "+myDeque);
+		
+		myDeque.removeFirst();
+		System.out.println("deque = "+myDeque);
+		
+		myDeque.removeLast();
+		System.out.println("deque = "+myDeque);
+		
+		
+		
+		System.out.println("-----------------------------------------------");
+		System.out.println("Iterator for deque: from head");
+		
+		Iterator itr_deque = myDeque.iterator();
+		//자료를 처음부터 하나씩 자른다
+		
+		while(itr_deque.hasNext())
+		{
+			System.out.println(itr_deque.next());
+		}
+		
+		System.out.println();
+		System.out.println("Iterator for deque: from tail");
+		
+		Iterator itr_deque_fromTail = myDeque.descendingIterator();
+		//자료를 뒤에서부터 하나씩 자른다
+		
+		while(itr_deque_fromTail.hasNext())
+		{
+			System.out.println(itr_deque_fromTail.next());
+		}
+		
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class binary_sorting_video {
+	
+	final static Random myRandom = new Random();
+
+	public static void main(String[] args) {
+		
+		System.out.println("//// Binary Sorting ////");
+		////System.out.println("Initial list: {9,5,6,0,3}");
+		System.out.println("Generate set of random elements");
+		System.out.print("with Length(insert number): ");
+		////System.out.println("Sorting --- ");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int length = sc.nextInt();
+		
+		System.out.print("Limits[0,...,N] (insert N): ");
+		
+		int Limit = sc.nextInt();
+		
+		//// Generate List of random elements
+		
+		List<Integer> randomList = new ArrayList<>();
+		
+		for(int i = 0 ; i < length;i++)
+		{
+			randomList.add(myRandom.nextInt(Limit));
+		}
+		
+		System.out.println();
+		System.out.println("randomList = "+randomList);
+		
+		//// way 1
+		////List<Integer> inintList = new ArrayList<>(List.of(9,5,6,0,3));
+		
+		//// way 2
+		//// List<Integer> inintList = new ArrayList<>(List.of(9,5,6,0,3));
+		//// inintList.addAll(Arrays.asList(new Integer[] {9,5,6,0,3}));
+		
+		//// Binary ////
+		
+		////List<Integer> sortedList = Binary_sorting_List(inintList);
+		List<Integer> sortedList = Binary_sorting_List(randomList);
+		System.out.println();
+		//// System.out.println("Sorted list : " + sortedList);
+		System.out.println("randomList : " + randomList);
+		
+		
+	}
+	public static List<Integer> Binary_sorting_List(List<Integer> input_list)
+	{
+		//// binary sorting code ////
+		String info = "";
+		int number_1, number_2, Buffer;
+		
+		for(int i = 0 ; i < input_list.size()-1 ; i++)
+		{
+			System.out.println("step: "+(i+1));
+			for(int j = i+1 ; j<input_list.size() ; j++)
+			{
+				System.out.print("i: "+i+", j: "+j);
+				number_1 = input_list.get(i);
+				number_2 = input_list.get(j);
+				info = "skip";
+				if(number_1>number_2)//// swap
+				{
+					Buffer = input_list.get(i); //// Buffer = 9
+					input_list.set(i, input_list.get(j)); //// input_list = [5,5,6,0,3]
+					input_list.set(j, Buffer);
+					info = "swap";
+				}
+				System.out.println(", "+input_list+"   " + info);
+			}
+			
+		}
+		
+		
+		return input_list;
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class map_practice {
+
+	public static void main(String[] args) {
+		System.out.println("////////////////////////////");
+		System.out.println("/////   Map Practice   /////");
+		System.out.println("////////////////////////////");
+		System.out.println("1) Make a simple map ");
+		
+		Map<Integer, String> simple_map = new LinkedHashMap<>();
+		
+		///  key            value
+		/// student ID      student name
+		///   101             John
+		///   103             Mark
+		///   110             Alice
+
+		simple_map.put(101, "John");
+		simple_map.put(103, "Mark");
+		simple_map.put(110, "Alice");
+
+		System.out.println("Simple_map = " + simple_map);
+		System.out.println("Simple_map(key) = " + simple_map.keySet());
+		System.out.println("Simple_map(values) = " + simple_map.values());
+		System.out.println("Simple_map(entries) = " + simple_map.entrySet());
+
+		/// Remove "Mark", remove(key)
+		System.out.println("");
+		System.out.println("2) Remove map's cell with key 103 - > Mark");
+		simple_map.remove(103);
+		
+		System.out.println("Simple_map = " + simple_map);
+
+		/// Update value "Alice" key = 110 to "Alice, Kim" 
+		System.out.println("");
+		System.out.println("3) Update map's cell with key 110 - > frome 'Alice' to 'Alice, Kim'");
+		simple_map.replace(110, "Alice, Kim");
+		
+		System.out.println("Simple_map = " + simple_map);
+
+		/// Make simple_map_2
+		
+		System.out.println("");
+		System.out.println("4) make a Map<String, Integer> simple_map_2");
+		
+		Map<String, Integer> simple_map_2 = new HashMap<>();
+
+		///   key             value
+		///   student name    grade
+		///   John            90
+		///   Mark            85
+		///   Alice           100
+
+		
+
+		simple_map_2.put("John", 90);
+		simple_map_2.put("Mark", 85);
+		simple_map_2.put("Alice", 100);
+		System.out.println("Simple_map_2 = " + simple_map_2);
+		System.out.println("");
+		System.out.println("Display Map using iterator"); 
+
+		for(Map.Entry mapElement: simple_map_2.entrySet())
+		{
+			String currentkey = (String) mapElement.getKey();
+
+			int current_grade = (Integer) mapElement.getValue();
+			System.out.println("key: " +currentkey +", value: " + current_grade);
+
+		}
+
+		System.out.println("");
+		System.out.println("5) Update map's cell with key 'John' from 90 to 95");
+		simple_map_2.replace("John", 95);
+		
+		System.out.println("Simple_map_2 = " + simple_map_2);
+
+		System.out.println("");
+		System.out.println("6) Map with sorting");
+
+		Map<Integer, String> simple_map_3 = new TreeMap<>();
+
+		simple_map_3.put(3, "Boxes");
+		simple_map_3.put(1, "Apples");
+		simple_map_3.put(10, "Jyuce");
+		simple_map_3.put(7, "Orange");
+
+		System.out.println("Simple_map_3 = " + simple_map_3);
+
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+package alg_5_friquency_analysis_video;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+public class frequency_analysis_video {
+
+	public static void main(String[] args) {
+		System.out.println("//////////////////////////////////////");
+		System.out.println("/////     Frequency Analysis     /////");
+		System.out.println(" for a given text (abcdaabbcadaceacde)");
+		
+		String Text_string = "abcdaabbcadaceacde";
+		
+		System.out.println("Text_string = " + Text_string);
+		
+		Map<String,Integer> dictionary = new TreeMap<>(); 
+		
+		/// call each character create and update map cells
+		
+		for(int i = 0 ; i < Text_string.length() ; i++)
+		{
+			/// convert char - > string
+			String current_character = Character.toString(Text_string.charAt(i));
+			
+			//System.out.println("current character: " + current_character);
+			
+			//                 i = 0   current_character = 'a'
+			if(dictionary.containsKey(current_character))
+			{
+				/// current character is already exist in the map
+				/// update value +1
+				///                                   read value of the current character
+				dictionary.replace(current_character, dictionary.get(current_character)+1);
+								
+			}
+			else /// current character is new doesnt exist in the map
+			{
+				/// Add a new cell to map < Key = current character, value = 1> 
+				dictionary.put(current_character, 1);
+				
+			}
+					
+			
+		}
+		System.out.println();
+		System.out.println("dictionary:");	
+		printMap(dictionary);
+		
+		/// sorting
+		
+		/// convert map to list
+		List<Entry<String, Integer>> list = new LinkedList<Entry<String,Integer>>(dictionary.entrySet());
+		
+		Collections.sort(list, new Comparator<Entry<String, Integer>>()
+				{
+			public int compare(Entry<String, Integer> o1, Entry<String,Integer> o2)
+			{
+				/// sorting values in ascending order
+				return o1.getValue().compareTo(o2.getValue());
+			}
+				});
+		/// convert sorted list back to map
+		
+		Map<String, Integer> sorted_map_ascending_order = new LinkedHashMap<>();
+		
+		for(Entry<String, Integer> entry : list)
+		{
+			sorted_map_ascending_order.put(entry.getKey(), entry.getValue());
+			
+		}
+		System.out.println();
+		System.out.println("dictionary after sorted_map_ascending_order:");	
+		printMap(sorted_map_ascending_order);
+		
+		///sort in the descending order
+		List<Entry<String, Integer>> list2 = new LinkedList<Entry<String,Integer>>(dictionary.entrySet());
+		
+		Collections.sort(list, new Comparator<Entry<String, Integer>>()
+				{
+			public int compare(Entry<String, Integer> o2, Entry<String,Integer> o1)
+			{
+				/// sorting values in ascending order
+				return o2.getValue().compareTo(o1.getValue());
+			}
+				});
+		
+		Map<String, Integer> sorted_map_decending_order = new LinkedHashMap<>();
+		
+		for(Entry<String, Integer> entry : list2)
+		{
+			sorted_map_decending_order.put(entry.getKey(), entry.getValue());
+			
+		}
+		System.out.println();
+		System.out.println("dictionary after sorted_map_decending_order:");	
+		printMap(sorted_map_decending_order);
+		
+	}
+	public static void printMap(Map<String,Integer> map)
+	{
+		for(Map.Entry mapElement: map.entrySet())
+		{
+			String currentkey = (String) mapElement.getKey();
+			
+			int current_grade = (Integer) mapElement.getValue();
+			System.out.println("key: " +currentkey +", value: " + current_grade);
+		}
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+package alg_6_text_analysis_in_class;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class alg_6_text_analysis {
+
+	public static void main(String[] args) {
+		//System.out.println("//     English text analysis     //");
+		System.out.println("//     Algorith, 6. text analysis     //");
+		//System.out.println("//     Compute frequency of each character.     //");
+		System.out.println("Insert text:");
+		//A last thing to note about key sentences is that academic readers expect them to be at the beginning of the paragraph. (The first sentence this paragraph is a good example of this in action!) This placement helps readers comprehend your argument. To see how, try this: find an academic piece (such as a textbook or scholarly article) that strikes you as well written and go through part of it reading just the first sentence of each paragraph. You should be able to easily follow the sequence of logic. When you're writing for professors, it is especially effective to put your key sentences first because they usually convey your own original thinking. It's a very good sign when tour paragraphs are typically composed of a telling key sentence followed by evidence and explanation.
+		
+		/*String Text_str ="Both versions convey a topic; its pretty easy to predict that the paragraph"
+				+ "will be about epidemiological evidence, but only the second version establishes an"
+				+ "argumentative point and puts it in context. The paragraph doesnt just describe"
+				+ "the epidemiological evidence; it shows how epidemiology is telling the same story"
+				+ "as etiology. Similarly, while Version A doesnt relate to anything in particular,"
+				+ "Version B immediately suggests that the prior paragraph addresses the biological"
+				+ "pathway (i.e. etiology) of a disease and that the new paragraph will bolster the emerging"
+				+ "hypothesis with a different kind of evidence. As a reader, its easy to keep track of "
+				+ "how the paragraph about cells and chemicals and such relates to the paragraph about "
+				+ "populations in different places.";*/
+		
+		Scanner sc = new Scanner(System.in);
+		String Text_str=sc.nextLine();
+		
+		Display_text(Text_str);
+		//// Make a dictionary
+		
+		//// key    value
+		//// char   frequency
+		Map<String, Integer> dictionary = new TreeMap<>();
+		
+		List<Integer> Excluded_symbols = new ArrayList<>(List.of(32,40,41,44,46,59,8217));
+		
+		for(int i = 0 ; i < Text_str.length() ; i++) //      i = 0
+		//for(int i = 0 ; i < 10 ; i++) //      i = 0
+		{
+			//// convert char to string
+			
+			char cur_character_char = Text_str.charAt(i); //// cur_character_char = 'B'
+			
+			int cur_character_index = (int)cur_character_char;
+	    	///System.out.print(i+") cur_character_char : " + cur_character_char);
+			
+			//System.out.println(", ascii = " + cur_ascii_index);
+			String current_character = Character.toString(cur_character_char);
+			
+			
+			if(check_current_symbol(cur_character_index, Excluded_symbols))
+			{
+				
+				if((cur_character_index >=65) && (cur_character_index<=90))
+				{
+					cur_character_index = cur_character_index +32;
+					current_character = Character.toString(cur_character_index);
+					//System.out.println(cur_ascii_index +" , "+current_character);
+				}
+				//System.out.print("current_character: " + current_character+", index: "+cur_ascii_index);
+				
+				
+				if(dictionary.containsKey(current_character))
+				{
+					/// step 2.2
+					dictionary.replace(current_character, dictionary.get(current_character)+1);
+				}
+				else /// dictionary doesnt contain current_character
+				{
+					/// step 2.1 add a new unit to dictionary
+					dictionary.put(current_character, 1);
+				}
+			}
+		}
+		/// Display a Map."dictionary"	
+		
+		//System.out.println("dictionary");
+		List<Entry<String, Integer>> list2 = new LinkedList<Entry<String,Integer>>(dictionary.entrySet());
+		Collections.sort(list2, new Comparator<Entry<String,Integer>>()
+				{
+			public int compare(Entry<String,Integer> s1,Entry<String,Integer> s2)
+			{
+				return s2.getValue().compareTo(s1.getValue());
+			}
+			
+				});
+		Map<String,Integer> sorted_map_descending_order = new LinkedHashMap<>();
+		
+		for(Entry<String,Integer> entry : list2)
+		{
+			sorted_map_descending_order.put(entry.getKey(), entry.getValue());
+		}
+		System.out.println();
+		System.out.println("dictionary after sorting in descending order:");
+		printMap(sorted_map_descending_order);
+		
+		/*for(Map.Entry mapElement: dictionary.entrySet())
+		{
+			String currentKey = (String) mapElement.getKey();
+			
+			int current_frequence =(Integer) mapElement.getValue();
+			
+			System.out.println(currentKey + ",  " +current_frequence);
+		}*/
+		
+	}
+	//(check_current_symbol(cur_ascii_index, Excluded_symbols))
+	public static boolean check_current_symbol(int symbol_index, List<Integer> excluded_symbols_list)
+	{
+		boolean output_flag = true;
+		
+		if(excluded_symbols_list.contains(symbol_index))
+		{
+			
+			output_flag = false;
+		}
+		
+		return output_flag;
+	}
+	
+	public static void Display_text(String input_text)
+	{
+		//System.out.println("Text: ");
+		
+		String new_text ="";
+		
+		int counter = 0;
+		
+		for(int i=0 ; i<input_text.length() ; i++) // i =0,1,2,3,...
+		{
+			new_text = new_text+ Character.toString(input_text.charAt(i));
+			
+			if(counter%100 == 99) // % = modulo, i%50 = i mod 50
+			{
+				/// break a line
+				new_text = new_text + "\n";
+			}
+			counter++;
+		}
+		System.out.println(new_text);
+	}
+	
+	public static void printMap(Map<String,Integer> map)
+	{
+		for(Map.Entry mapElement : map.entrySet())
+		{
+			String current_key = (String) mapElement.getKey();
+			int current_grade = (Integer) mapElement.getValue();
+			System.out.println(current_key +" , "+current_grade);
+		}
+		
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+package search_alg_in_class;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+public class search_alg {
+
+	public static void main(String[] args) {
+		System.out.println("////////////////////////////////");
+		System.out.println("///         Searching        ///");
+		System.out.println("---     Linear algorithm     ---");
+		final Random myRandom = new Random();
+		//List<Integer> A = new ArrayList<>(List.of(2,8,3,5,9,1));
+		//// Generate random numbers in range 0,...,100  ////
+		
+		List<Integer> A = new ArrayList<>();
+		for(int i = 0 ; i<100 ; i++)
+		{
+			A.add(myRandom.nextInt(100));
+			
+		}
+		System.out.println("A = " + A);
+		Collections.sort(A);
+		System.out.println("A_sort = " + A);
+		/*System.out.println("A = "+A);
+		int key = 5;
+		int search_index = linear_search(A,key);
+		System.out.println("Linear_search("+key+"), index = " +search_index+", verify A[" + linear_search(A,5) + "] = "+ A.get(search_index));
+		
+		key = 8;
+		search_index = linear_search(A,key);
+		System.out.println("Linear_search("+key+"), index = " +search_index+", verify A[" + linear_search(A,5) + "] = "+ A.get(search_index));
+		
+		key = 4;
+		search_index = linear_search(A,key);
+		System.out.println("Linear_search("+key+"), index = " +search_index+", " + key+"is not exist in A ");
+		
+		System.out.println("");
+		System.out.println("---         Binary Search        ---");
+		
+		Collections.sort(A);
+		System.out.println("A_sort = " + A);
+		*/
+		int key = 5;
+		int binary_search_index = binary_search(A,key);
+		if(binary_search_index!=-1)
+		{
+			System.out.println("Binary_search(" + key+ ") = " + binary_search_index+", verify A["+ binary_search_index + "]" +A.get(binary_search_index));
+		}
+		else
+		{
+			System.out.println("Binary_search(" + key+ ") = " + binary_search_index+", "+ key+" is not exist in A ");
+		}
+		//System.out.println("Binary_search(" + key+ ") = " + binary_search_index+", verify A["+ binary_search_index + "]" +A.get(binary_search_index));
+		
+		
+		
+		
+	}
+	public static int binary_search(List<Integer> input_data, int Key)
+	{
+		///      middle
+		/// L         R        
+		/// 1,2,3,5,8,9
+		                              ///  set a range from L to R
+		int L=0;                      /// L is the index of the beginning of the range (L = 0)
+		int R = input_data.size()-1;  /// R is the index of the end of the range (R = 4)
+		
+		
+		while(L <=R)
+		{
+			int middle = L+(R-L)/2;       /// 0 * (4-0)/2 = 2
+			
+			if(Key == input_data.get(middle))
+			{
+				return middle;				
+			}
+			if(Key< input_data.get(middle)) ///        L   R
+				                            ///        1,2,3,5,8,9
+			{
+				R = middle-1;
+			}
+			if(Key > input_data.get(middle))
+			{
+				///       L   R
+				/// 1,2,3,5,8,9
+				L= middle +1;				
+			}
+			
+		}
+		return -1; /// means no Key in input_data(A)
+	}
+	
+	public static int linear_search(List<Integer> input_data, int Key)
+	{
+		int index = -1; //// -1 means the Key is not exist in the input_data (A)
+		
+		for(int i = 0 ; i < input_data.size() ; i++)
+		{
+			
+			if(input_data.get(i) == Key)
+			{
+				index = i;
+			}
+		}
+		
+		
+		return index;
+	}
+
+}
