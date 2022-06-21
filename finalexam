@@ -1,0 +1,256 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class final_exam_1 {
+	
+
+	public static void main(String[] args) {		
+		List<Integer> A = new LinkedList<>(List.of(4, 10, 2, 8, 11, 5, 7, 2, 1));
+		
+		System.out.println("//     Final exam. Problem 1.   //");
+		System.out.println("///   Jin Sang Ho. 201521431   ///");
+		System.out.println("///         Median Filter      ///");
+		System.out.println("Part 1) Find median for A = "+A);
+		System.out.println("A = " +A);
+		
+		int number_1, number_2, Buffer;		
+		for(int i = 0 ; i < A.size()-1 ; i++)
+		{
+			for(int j = i+1 ; j<A.size() ; j++)
+			{
+				number_1 = A.get(i);
+				number_2 = A.get(j);
+				if(number_1>number_2)
+				{
+					Buffer = A.get(i);
+					A.set(i, A.get(j)); 
+					A.set(j, Buffer);
+				}
+				
+			}
+			
+		}
+		
+		System.out.println("A_sort = "+A);
+		System.out.print("Find median: L = Length(A) = "+A.size()+", median_index = L/2 =4/2 ="+A.size()/2+", median(A) = ");
+		System.out.println(A.get(A.size()/2));
+		
+		
+		
+		final Random random = new Random(); 
+		List<Integer> R = new ArrayList<>();
+		for(int i = 0 ; i<20 ; i++)
+		{
+			R.add(random.nextInt(20));
+			
+		}
+
+		System.out.println("");
+		System.out.println("Part 2) Generate 20 random numbers in range (0,20) (use List 'Random' to store numbers) and find a median");
+		System.out.println("Random = "+R);
+		for(int i = 0 ; i < R.size()-1 ; i++)
+		{
+			for(int j = i+1 ; j<R.size() ; j++)
+			{
+				number_1 = R.get(i);
+				number_2 = R.get(j);
+				if(number_1>number_2)
+				{
+					Buffer = R.get(i);
+					R.set(i, R.get(j)); 
+					R.set(j, Buffer);
+				}
+				
+			}
+			
+		}		
+		
+		System.out.println("Random_sort = "+R);
+		System.out.println("Find median: L = length(Random) = "+R.size()+", median_index = L/2 = 10/2 ="+R.size()/2+", median(Random) = "+R.get((R.size()/2)-1));
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+public class fianl_exam_2 {
+
+	public static void main(String[] args) {
+		
+		System.out.println("//     Final exam. Problem 2.     ///");
+		System.out.println("///    Jin Sang Ho. 201521431     ///");
+		System.out.println("/// Frequency analysis for digits ///");
+		System.out.println("1) Insert any digits(no need to generate, you can use String Text_string = \\\"623... 132\\\"");
+		String Text_string = "6235789627836517089657123657816237851645193567045617832647516262613412845132";
+		
+		
+		
+		System.out.println("Text:");
+		System.out.println(Text_string);
+		System.out.println("");
+		System.out.println("dictionary after sorting in descending order:");
+		
+		Map<String,Integer> dictionary = new TreeMap<>(); 
+		
+		for(int i = 0 ; i < Text_string.length() ; i++)
+		{
+			String character = Character.toString(Text_string.charAt(i));
+			if(dictionary.containsKey(character))
+			{
+				dictionary.replace(character, dictionary.get(character)+1);
+			}
+			else
+			{
+				dictionary.put(character, 1);				
+			}			
+		}
+		List<Entry<String, Integer>> list2 = new LinkedList<Entry<String,Integer>>(dictionary.entrySet());
+		
+		Collections.sort(list2, new Comparator<Entry<String, Integer>>()
+				{
+			public int compare(Entry<String, Integer> o2, Entry<String,Integer> o1)
+			{
+				return o1.getValue().compareTo(o2.getValue());
+			}
+				});
+		
+		Map<String, Integer> sorted_dictionary = new LinkedHashMap<>();
+		
+		for(Entry<String, Integer> entry : list2)
+		{
+			sorted_dictionary.put(entry.getKey(), entry.getValue());
+			System.out.println(entry.getKey()+", "+entry.getValue());
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
+public class final_exam_3 {
+
+	public static void main(String[] args) {
+		System.out.println("//     Final exam. Problem 3.     ///");
+		System.out.println("///    Jin Sang Ho. 201521431     ///");
+		System.out.println("/    Correlation of random numbers");
+		System.out.println("");
+
+		System.out.println("1) Generate 30 random numbers in range (0,20) (use List 'Random' to store numbers)");
+		final Random random = new Random(); 
+		List<Integer> Random = new ArrayList<>();
+		for(int i = 0 ; i<30 ; i++)
+		{
+			Random.add(random.nextInt(20));
+			
+		}
+		System.out.println("Random = " + Random);
+		System.out.println("2) Divide List 'Random' into pairs (num1, num2, ...) and compute a difference: dif = num1 - num2");
+		System.out.println("   Save all dif in the List 'Difference'");
+		int buffer = 0, num1 = 0, num2 = 0, dif=0;
+		List<Integer> Difference = new LinkedList<>();
+		for(int i=0 ;i<Random.size()-1 ;i++)
+		{
+			num1=Random.get(i);
+			num2=Random.get(i+1);
+			dif = num1-num2;
+			Difference.add(dif);		
+			System.out.println("Pair #"+i+"("+num1+", "+num2+"), dif: "+dif);
+			
+		}
+		System.out.println("Difference = "+Difference);
+		
+		System.out.println("3) Sort 'Difference' and display");
+		int number_1, number_2, Buffer;		
+		for(int i = 0 ; i < Difference.size()-1 ; i++)
+		{
+			for(int j = i+1 ; j<Difference.size() ; j++)
+			{
+				number_1 = Difference.get(i);
+				number_2 = Difference.get(j);
+				if(number_1>number_2)
+				{
+					Buffer = Difference.get(i);
+					Difference.set(i, Difference.get(j)); 
+					Difference.set(j, Buffer);
+				}
+				
+			}
+			
+		}
+		
+		System.out.println("Difference_sort = "+Difference);
+		
+		
+
+		
+		
+		
+		
+	}
+
+}
